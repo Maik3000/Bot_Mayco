@@ -70,57 +70,119 @@ def decide_move(board: list, player_id: str) -> [int, int]:
     Decides next move to make.
     """
     
-    #aca va la estrategia personal a desarrollar
+    #strategy 
     #defensa
 
     #row 0
-    ''''
-    if board[0] and board[1] != "-":
-        row = board[0]
-        column = board[2]
+    if board[0][0] == board[0][1] == player_id and board[0][2] == "-":
+        row = 0
+        column = 2
     
-    elif board[0] and board[2] != "-":
-        row = board[0]
-        column = board[1]
+    elif board[0][0] == board[0][2] == player_id and board[0][1] == "-":
+        row = 0
+        column = 1
     
-    elif board[1] and board[2] != "-":
-        row = board[0]
-        column = board[0]
+    elif board[0][1] == board[0][2] == player_id and board[0][0] == "-":
+        row = 0
+        column = 0
 
 
     #row 1
-    elif board[3] and board[4] != "-":
-        row = board[1]
-        column = board[2]
+    elif board[1][0] == board[1][1] == player_id and board[1][2] == "-":
+        row = 1
+        column = 2
     
-    elif board[3] and board[5] != "-":
-        row = board[1]
-        column = board[1]
+    elif board[1][0] == board[1][2] == player_id and board[1][1] == "-":
+        row = 1
+        column = 1
     
-    elif board[4] and board[5] != "-":
-        row = board[1]
-        column = board[0]
+    elif board[1][1] == board[1][2] == player_id and board[1][0] == "-":
+        row = 1
+        column = 0
 
     #row 2
-    elif board[6] and board[7] != "-":
-        row = board[2]
-        column = board[2]
+    elif board[2][0] == board[2][1] == player_id and board[2][2] == "-":
+        row = 2
+        column = 2
+
+    elif board[2][0] == board[2][2] == player_id and board[2][1] == "-":
+        row = 2
+        column = 1
     
-    elif board[6] and board[8] != "-":
-        row = board[2]
-        column = board[1]
+    elif board[2][1] == board[2][2] == player_id and board[2][0] == "-":
+        row = 2
+        column = 0
+
+    #line 0
+    elif board[0][0] == board[1][0] == player_id and board[2][0] == "-":
+        row = 2
+        column = 0
     
-    elif board[7] and board[8] != "-":
-        row = board[2]
-        column = board[0]
+    elif board[0][0] == board[2][0] == player_id and board[1][0] == "-":
+        row = 1
+        column = 0
+
+    elif board[1][0] == board[2][0] == player_id and board[0][0] == "-":
+        row = 0
+        column = 0
+
+    #line 1
+    elif board[0][1] == board[1][1] == player_id and board[2][1] == "-":
+        row = 2
+        column = 1
+
+    elif board[0][1] == board[2][1] == player_id and board[1][1] == "-":
+        row = 1
+        column = 1
     
+    elif board[1][1] == board[2][1] == player_id and board[0][1] == "-":
+        row = 0
+        column = 1
+    
+    #line 2
+    elif board[0][2] == board[1][2] == player_id and board[2][2] == "-":
+        row = 2
+        column = 2
+
+    elif board[0][2] == board[2][2] == player_id and board[1][2] == "-":
+        row = 1
+        column = 2
+
+    elif board[1][2] == board[2][2] == player_id and board[0][2] == "-":
+        row = 0
+        column = 2
+
+    #diagonal_left
+    elif board[0][0] == board[1][1] == player_id and board[2][2] == "-":
+        row = 2
+        column = 2
+
+    elif board[0][0] == board[2][2] == player_id and board[1][1] == "-":
+        row = 1
+        column = 1
+    
+    elif board[1][1] == board[2][2] == player_id and board[0][0] == "-":
+        row = 0
+        column = 0
+
+    #diagonal_right
+    elif board[0][2] == board[1][1] == player_id and board[2][0] == "-":
+        row = 2
+        column = 0
+
+    elif board[0][2] == board[2][0] == player_id and board[1][1] == "-":
+        row = 1
+        column = 1
+    
+    elif board[1][1] == board[2][0] == player_id and board[0][2] == "-":
+        row = 0
+        column = 2
+
+    #en culquier otro caso...
     else:
-    ''' 
-    if board[0][0] and board[0][1] and board[0][2] and board[1][0] and board[1][1] and board[1][2] and board[2][0] and board[2][1] and board[2][2] == "-":
-        row = [1]
-        column = [1]    
-    
-    return [row, column]
+        row = randint(0,2)
+        column = randint(0,2)    
+        return [row, column]
 
 
 def validate_move(board: list, move: list) -> bool:
