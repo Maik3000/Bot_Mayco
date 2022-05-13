@@ -69,11 +69,56 @@ def decide_move(board: list, player_id: str) -> [int, int]:
     """
     Decides next move to make.
     """
-
+    
     #aca va la estrategia personal a desarrollar
+    #defensa
 
-    row = randint(0, 2)
-    column = randint(0, 2)
+    #row 0
+    ''''
+    if board[0] and board[1] != "-":
+        row = board[0]
+        column = board[2]
+    
+    elif board[0] and board[2] != "-":
+        row = board[0]
+        column = board[1]
+    
+    elif board[1] and board[2] != "-":
+        row = board[0]
+        column = board[0]
+
+
+    #row 1
+    elif board[3] and board[4] != "-":
+        row = board[1]
+        column = board[2]
+    
+    elif board[3] and board[5] != "-":
+        row = board[1]
+        column = board[1]
+    
+    elif board[4] and board[5] != "-":
+        row = board[1]
+        column = board[0]
+
+    #row 2
+    elif board[6] and board[7] != "-":
+        row = board[2]
+        column = board[2]
+    
+    elif board[6] and board[8] != "-":
+        row = board[2]
+        column = board[1]
+    
+    elif board[7] and board[8] != "-":
+        row = board[2]
+        column = board[0]
+    
+    else:
+    ''' 
+    if board[0,0] and board[0,1] and board[0,2] and board[1,0] and board[1,1] and board[1,2] and board[2,0] and board[2,1] and board[2,2] == "-":
+        row, column = board[1,1]
+    
     return [row, column]
 
 
