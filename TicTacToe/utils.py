@@ -191,8 +191,113 @@ def decide_move(board: list, player_id: str) -> [int, int]:
     #defensa
     while player_id == "O":
 
-        row = randint(0,2)
-        column = randint(0,2)
+        #row 0
+        if board[0][0] == board[0][1] == "X" and board[0][2] == "-":
+            row = 0
+            column = 2
+            
+        elif board[0][0] == board[0][2] == "X" and board[0][1] == "-":
+            row = 0
+            column = 1
+            
+        elif board[0][1] == board[0][2] == "X"  and board[0][0] == "-":
+            row = 0
+            column = 0
+
+        #row 1
+        elif board[1][0] == board[1][1] == "X"  and board[1][2] == "-":
+            row = 1
+            column = 2
+            
+        elif board[1][0] == board[1][2] == "X" and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[1][2] == "X" and board[1][0] == "-":
+            row = 1
+            column = 0
+
+        #row 2
+        elif board[2][0] == board[2][1] == "X" and board[2][2] == "-":
+            row = 2
+            column = 2
+
+        elif board[2][0] == board[2][2] == "X" and board[2][1] == "-":
+            row = 2
+            column = 1
+            
+        elif board[2][1] == board[2][2] == "X" and board[2][0] == "-":
+            row = 2
+            column = 0
+
+        #line 0
+        elif board[0][0] == board[1][0] == "X" and board[2][0] == "-":
+            row = 2
+            column = 0
+            
+        elif board[0][0] == board[2][0] == "X" and board[1][0] == "-":
+            row = 1
+            column = 0
+
+        elif board[1][0] == board[2][0] == "X" and board[0][0] == "-":
+            row = 0
+            column = 0
+
+        #line 1
+        elif board[0][1] == board[1][1] == "X" and board[2][1] == "-":
+            row = 2
+            column = 1
+
+        elif board[0][1] == board[2][1] == "X" and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[2][1] == "X" and board[0][1] == "-":
+            row = 0
+            column = 1
+            
+        #line 2
+        elif board[0][2] == board[1][2] == "X" and board[2][2] == "-":
+            row = 2
+            column = 2
+
+        elif board[0][2] == board[2][2] == "X" and board[1][2] == "-":
+            row = 1
+            column = 2
+
+        elif board[1][2] == board[2][2] == "X" and board[0][2] == "-":
+            row = 0
+            column = 2
+
+        #diagonal_left
+        elif board[0][0] == board[1][1] == "X" and board[2][2] == "-":
+            row = 2
+            column = 2
+
+        elif board[0][0] == board[2][2] == "X" and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[2][2] == "X" and board[0][0] == "-":
+            row = 0
+            column = 0
+
+        #diagonal_right
+        elif board[0][2] == board[1][1] == "X" and board[2][0] == "-":
+            row = 2
+            column = 0
+
+        elif board[0][2] == board[2][0] == "X" and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[2][0] == "X" and board[0][2] == "-":
+            row = 0
+            column = 2
+
+        else:
+            row = randint(0,2)
+            column = randint(0,2)
         return [row, column]
 
 def validate_move(board: list, move: list) -> bool:
