@@ -5,7 +5,7 @@ import utils
 
 def main():
 
-    NAME = "Maycos"
+    NAME = "Mayco"
     print("\n------- Starting tic-tac-toe bot -------\n")
 
     # Register phase begins
