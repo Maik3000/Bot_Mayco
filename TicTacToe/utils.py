@@ -79,6 +79,8 @@ def decide_move(board: list, player_id: str) -> [int, int]:
             row = 1
             column = 1
 
+        
+        #valuar posibles victorias
         #row 0
         elif board[0][0] == board[0][1] == player_id and board[0][2] == "-":
             row = 0
@@ -182,15 +184,178 @@ def decide_move(board: list, player_id: str) -> [int, int]:
         elif board[1][1] == board[2][0] == player_id and board[0][2] == "-":
             row = 0
             column = 2
-
+            
         else:
-            row = randint(0,2)
-            column = randint(0,2)
+            #estrategia esquinas
+            #par row 0
+            if board[0][0] or board[0][2] == "-":
+                row = 0 
+                column = randint(0,2)
+            
+                if board[0][0] == "-":
+                    row = 0
+                    column = 0
+
+                elif board[0][2] == "-":
+                    row = 0
+                    column = 2
+
+            #par row 2    
+            elif board[2][0] or board[2][2] == "-":
+                row = 2 
+                column = randint(0,2)
+
+                if board[2][0] == "-":
+                    row = 2
+                    column = 0
+
+                elif board[2][2] == "-":
+                    row = 2
+                    column = 2
+        
+        #par column 0
+            elif board[0][0] or board[2][0] == "-":
+                row = randint(0,2) 
+                column = 0
+
+                if board[0][0] == "-":
+                    row = 0
+                    column = 0
+
+                elif board[2][0] == "-":
+                    row = 2
+                    column = 0
+        
+        #par column 2
+            elif board[0][2] or board[2][2] == "-":
+                row = randint(0,2) 
+                column = 2
+
+                if board[0][2] == "-":
+                    row = 0
+                    column = 2
+
+                elif board[2][2] == "-":
+                    row = 2
+                    column = 2
+
+            else:
+                row = randint(0,2)
+                column = randint(0,2)
         return [row, column]    
         
     #defensa
     while player_id == "O":
 
+        #respuesta a opciones de victoria
+
+        #row 0
+        if board[0][0] == board[0][1] == player_id and board[0][2] == "-":
+            row = 0
+            column = 2
+            
+        elif board[0][0] == board[0][2] == player_id and board[0][1] == "-":
+            row = 0
+            column = 1
+            
+        elif board[0][1] == board[0][2] == player_id and board[0][0] == "-":
+            row = 0
+            column = 0
+
+        #row 1
+        elif board[1][0] == board[1][1] == player_id and board[1][2] == "-":
+            row = 1
+            column = 2
+            
+        elif board[1][0] == board[1][2] == player_id and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[1][2] == player_id and board[1][0] == "-":
+            row = 1
+            column = 0
+
+        #row 2
+        elif board[2][0] == board[2][1] == player_id and board[2][2] == "-":
+            row = 2
+            column = 2
+
+        elif board[2][0] == board[2][2] == player_id and board[2][1] == "-":
+            row = 2
+            column = 1
+            
+        elif board[2][1] == board[2][2] == player_id and board[2][0] == "-":
+            row = 2
+            column = 0
+
+        #line 0
+        elif board[0][0] == board[1][0] == player_id and board[2][0] == "-":
+            row = 2
+            column = 0
+            
+        elif board[0][0] == board[2][0] == player_id and board[1][0] == "-":
+            row = 1
+            column = 0
+
+        elif board[1][0] == board[2][0] == player_id and board[0][0] == "-":
+            row = 0
+            column = 0
+
+        #line 1
+        elif board[0][1] == board[1][1] == player_id and board[2][1] == "-":
+            row = 2
+            column = 1
+
+        elif board[0][1] == board[2][1] == player_id and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[2][1] == player_id and board[0][1] == "-":
+            row = 0
+            column = 1
+            
+        #line 2
+        elif board[0][2] == board[1][2] == player_id and board[2][2] == "-":
+            row = 2
+            column = 2
+
+        elif board[0][2] == board[2][2] == player_id and board[1][2] == "-":
+            row = 1
+            column = 2
+
+        elif board[1][2] == board[2][2] == player_id and board[0][2] == "-":
+            row = 0
+            column = 2
+
+        #diagonal_left
+        elif board[0][0] == board[1][1] == player_id and board[2][2] == "-":
+            row = 2
+            column = 2
+
+        elif board[0][0] == board[2][2] == player_id and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[2][2] == player_id and board[0][0] == "-":
+            row = 0
+            column = 0
+
+        #diagonal_right
+        elif board[0][2] == board[1][1] == player_id and board[2][0] == "-":
+            row = 2
+            column = 0
+
+        elif board[0][2] == board[2][0] == player_id and board[1][1] == "-":
+            row = 1
+            column = 1
+            
+        elif board[1][1] == board[2][0] == player_id and board[0][2] == "-":
+            row = 0
+            column = 2
+
+        #-------------------------------------------------------------
+
+        #validar bloqueo
         #row 0
         if board[0][0] == board[0][1] == "X" and board[0][2] == "-":
             row = 0
@@ -294,114 +459,7 @@ def decide_move(board: list, player_id: str) -> [int, int]:
         elif board[1][1] == board[2][0] == "X" and board[0][2] == "-":
             row = 0
             column = 2
-        #-------------------------------------------------------------
-
-        #respuesta a opciones de victoria
-
-        #row 0
-        elif board[0][0] == board[0][1] == player_id and board[0][2] == "-":
-            row = 0
-            column = 2
-            
-        elif board[0][0] == board[0][2] == player_id and board[0][1] == "-":
-            row = 0
-            column = 1
-            
-        elif board[0][1] == board[0][2] == player_id and board[0][0] == "-":
-            row = 0
-            column = 0
-
-        #row 1
-        elif board[1][0] == board[1][1] == player_id and board[1][2] == "-":
-            row = 1
-            column = 2
-            
-        elif board[1][0] == board[1][2] == player_id and board[1][1] == "-":
-            row = 1
-            column = 1
-            
-        elif board[1][1] == board[1][2] == player_id and board[1][0] == "-":
-            row = 1
-            column = 0
-
-        #row 2
-        elif board[2][0] == board[2][1] == player_id and board[2][2] == "-":
-            row = 2
-            column = 2
-
-        elif board[2][0] == board[2][2] == player_id and board[2][1] == "-":
-            row = 2
-            column = 1
-            
-        elif board[2][1] == board[2][2] == player_id and board[2][0] == "-":
-            row = 2
-            column = 0
-
-        #line 0
-        elif board[0][0] == board[1][0] == player_id and board[2][0] == "-":
-            row = 2
-            column = 0
-            
-        elif board[0][0] == board[2][0] == player_id and board[1][0] == "-":
-            row = 1
-            column = 0
-
-        elif board[1][0] == board[2][0] == player_id and board[0][0] == "-":
-            row = 0
-            column = 0
-
-        #line 1
-        elif board[0][1] == board[1][1] == player_id and board[2][1] == "-":
-            row = 2
-            column = 1
-
-        elif board[0][1] == board[2][1] == player_id and board[1][1] == "-":
-            row = 1
-            column = 1
-            
-        elif board[1][1] == board[2][1] == player_id and board[0][1] == "-":
-            row = 0
-            column = 1
-            
-        #line 2
-        elif board[0][2] == board[1][2] == player_id and board[2][2] == "-":
-            row = 2
-            column = 2
-
-        elif board[0][2] == board[2][2] == player_id and board[1][2] == "-":
-            row = 1
-            column = 2
-
-        elif board[1][2] == board[2][2] == player_id and board[0][2] == "-":
-            row = 0
-            column = 2
-
-        #diagonal_left
-        elif board[0][0] == board[1][1] == player_id and board[2][2] == "-":
-            row = 2
-            column = 2
-
-        elif board[0][0] == board[2][2] == player_id and board[1][1] == "-":
-            row = 1
-            column = 1
-            
-        elif board[1][1] == board[2][2] == player_id and board[0][0] == "-":
-            row = 0
-            column = 0
-
-        #diagonal_right
-        elif board[0][2] == board[1][1] == player_id and board[2][0] == "-":
-            row = 2
-            column = 0
-
-        elif board[0][2] == board[2][0] == player_id and board[1][1] == "-":
-            row = 1
-            column = 1
-            
-        elif board[1][1] == board[2][0] == player_id and board[0][2] == "-":
-            row = 0
-            column = 2
-       
+               
         else:
             row = randint(0,2)
             column = randint(0,2)
