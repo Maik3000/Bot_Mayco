@@ -7,6 +7,7 @@
 
 Para correr el bot primero deberá de clonar el repositorio:
 > $ git clone https://github.com/Maik3000/Bot_Mayco.git
+
 > $ cd Bot_Mayco
 
 Una vez clonado, debera instalar los requerimientos usando pip
@@ -14,4 +15,5 @@ Una vez clonado, debera instalar los requerimientos usando pip
 
 Luego, se corre localmente así:
 > $ cd tictactoe
+
 > $ python main.py
